@@ -1,14 +1,13 @@
 ---
 layout: archive
-title: "Notes"
-permalink: /portfolio/
+title: "Art"
+permalink: /art/
 author_profile: true
 ---
 
 {% include base_path %}
 
-
-{% for post in site.portfolio %}
+{% for post in site.art reversed %}
   {% include archive-single.html %}
 {% endfor %}
 
