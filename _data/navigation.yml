@@ -12,7 +12,7 @@ main:
   - title: "Notes"
     url: /notes/
     
-  - title: "Blog Posts"
+  - title: "Blog"
     url: /year-archive/
 
   - title: "Art"
@@ -20,7 +20,8 @@ main:
     
   - title: "CV"
     url: /cv/
-    
+  
+  - title: "Protfolio"
+    url: /protfolio/
   #- title: "Guide"
   #  url: /markdown/
-
