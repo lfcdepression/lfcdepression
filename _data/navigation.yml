@@ -1,25 +1,25 @@
 # main links links
 main:
-  - title: "Publications"
+  - title: "PUBLICATIONS"
     url: /publications/
 
-  - title: "Talks"
+  - title: "TALKS"
     url: /talks/    
 
   #- title: "Teaching"
   #  url: /teaching/    
 
-  - title: "Notes"
+  - title: "NOTES"
     url: /notes/
     
-  - title: "Blog"
+  - title: "BLOG"
     url: /bolg/
 
-  - title: "Art"
+  - title: "ART"
     url: /art/
 
-  - title: "Protfolio"
-    url: /protfolio/
+  - title: "ARCHIVE"
+    url: /archive/
     
   - title: "CV"
     url: /cv/
