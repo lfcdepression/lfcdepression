@@ -12,7 +12,7 @@ date: 2024-03-09
 # 分子动力学
 ## 哈密顿力学
 ### 哈密顿正则方程
-基本思路：经典力学由牛顿第二定律主导：\\(m_i\dot{\mathbf{r}}_i=\mathbf{F}_i\\)，这是一个矢量二阶微分方程，若在d维空间中有N个粒子，那么我们一共有dN个方程，通过选取初始的r和v可以得到唯一的解。经典力学产生了一类经典的动力系统：哈密顿系统，研究在相空间中解的性态，相空间中的演化由哈密顿正则方程主导：
+基本思路：经典力学由牛顿第二定律主导：$m_i\dot{\mathbf{r}}_i=\mathbf{F}_i$，这是一个矢量二阶微分方程，若在d维空间中有N个粒子，那么我们一共有dN个方程，通过选取初始的r和v可以得到唯一的解。经典力学产生了一类经典的动力系统：哈密顿系统，研究在相空间中解的性态，相空间中的演化由哈密顿正则方程主导：
 
 $$\begin{aligned}\dot{p}_i&=-\frac{\partial H}{\partial q_i}\\\dot{q}_i&=\frac{\partial H}{\partial p_i}\end{aligned}$$
 
@@ -52,7 +52,7 @@ $$\begin{aligned}
 &\boldsymbol{r}(t-\Delta t)\\&=\boldsymbol{r}(t)-\boldsymbol{\nu}(t)\Delta t+\frac{\boldsymbol{F}(\boldsymbol{r}(t))}{2\boldsymbol{m}}\Delta t^{2}\left.-\frac{1}{6}\frac{\partial^{3}\boldsymbol{r}}{\partial t^{3}}\right|_{t}\Delta t^{3}+O(\Delta t^{4})
 \end{aligned}$$
 
-通过上面两个式子相加，相减可以得到下一个时刻的坐标\\(\boldsymbol{r}(t+\Delta t)\\)和这一时刻的速度\\(\boldsymbol{v}(t)\\)，得到下面一个时刻的坐标需要之前的两个时刻的坐标，但是我们一般只有一个初始条件，因此这里有一个技巧先得到低精度再得到高精度
+通过上面两个式子相加，相减可以得到下一个时刻的坐标$\boldsymbol{r}(t+\Delta t)$和这一时刻的速度$\boldsymbol{v}(t)$，得到下面一个时刻的坐标需要之前的两个时刻的坐标，但是我们一般只有一个初始条件，因此这里有一个技巧先得到低精度再得到高精度
 
 $$\begin{aligned}\boldsymbol{r}(t+\Delta t)&=2\boldsymbol{r}(t)-\boldsymbol{r}(t-\Delta t)+\frac{\boldsymbol{F}(\boldsymbol{r}(t))}{\boldsymbol{m}}\Delta t^2+O(\Delta t^4)\\ \\ \boldsymbol{v}(t)&=\frac{'\boldsymbol{r}(t+\Delta t)-\boldsymbol{r}(t-\Delta t)}{2\Delta t}+O(\Delta t^2)\end{aligned}$$
 
@@ -66,7 +66,7 @@ $$\begin{aligned}
 \end{aligned}$$
 
 ### 为什么Verlet算法是有效的呢？
-密度可以写成\\( \rho =\frac{\exp(\frac{-H}{kT})}{Z}\\)是不显含时间的，之后把泊松括号作为一个算符来处理（算符化之后有很多经常用在量子力学里面的方法可以被我们利用处理问题，例如Trotter展开等）
+密度可以写成$ \rho =\frac{\exp(\frac{-H}{kT})}{Z}$是不显含时间的，之后把泊松括号作为一个算符来处理（算符化之后有很多经常用在量子力学里面的方法可以被我们利用处理问题，例如Trotter展开等）
 
 $$\begin{aligned}iL&=\sum_{i=1}^{N}\left[\frac{\partial H}{\partial\mathbf{r}_i}\cdot\frac{\partial}{\partial\mathbf{r}_i}-\frac{\partial H}{\partial\mathbf{r}_i}\cdot\frac{\partial}{\partial\mathbf{p}_i}\right]\\&=\sum_{i=1}^{N}\left[\frac{\mathbf{p}_i}{m_i}\cdot\frac{\partial}{\partial\mathbf{r}_i}+\mathbf{F}_i\cdot\frac{\partial}{\partial\mathbf{p}_i}\right]\end{aligned}$$
 
@@ -87,7 +87,7 @@ $$\begin{aligned}e^{i\hat{L}_2(\mathbf{x})\Delta t/2}\boldsymbol{x}(t_0)&=\left[
 
 $$e^{i\hat{L}_2\{\boldsymbol{x}\}\Delta t/2}\boldsymbol{x}(t_0)=\boldsymbol{x}(t_0)+\frac{\Delta t}2\sum_{i=1}^{3N}\dot{p}_i\frac{\partial\boldsymbol{x}(t_0)}{\partial\boldsymbol{p}_i}$$
 
-结合过程还可以得到\\(\hat{L}_2\\)的物理意义
+结合过程还可以得到$\hat{L}_2$的物理意义
 
 $$i\hat{L}_2=-\sum_{i=1}^{3N}\frac{\partial H}{\partial x_i}\frac{\partial}{\partial p_i}$$
 

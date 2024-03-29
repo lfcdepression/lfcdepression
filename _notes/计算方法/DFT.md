@@ -29,7 +29,7 @@ $$\begin{aligned}
 
 $$\Psi(\mathbf{r},\mathbf{R})=\chi(\mathbf{R})\psi(\mathbf{r},\mathbf{R})$$
 
-右边第一项是原子核波函数，第二项是电子波函数，进一步由于我们处理电子运动时可以近似认为原子核不动，因此\\(\mathbf{R}\\)可以作为参数出现，在讨论中可以略去。因此系统的哈密顿量可以被写为：
+右边第一项是原子核波函数，第二项是电子波函数，进一步由于我们处理电子运动时可以近似认为原子核不动，因此$\mathbf{R}$可以作为参数出现，在讨论中可以略去。因此系统的哈密顿量可以被写为：
 
 $$\begin{aligned}
 \text{H}& =H_{Nu}+H_{el}  \\
@@ -37,7 +37,7 @@ H_{Nu}& =H_{N}+\sum_{I}V_{e}(\mathbf{R}_{I})  \\
 H_{el}& =H_{e}+\sum_{i}V_{e}(\mathbf{r}_{i}) 
 \end{aligned}$$
 
-其中\\(V\\)表示电子和原子核的相互作用势，在单独考虑其中一者时可以作为外场，此时原子核系统通过牛顿方程处理（类似于处理声子），电子系统通过薛定谔方程处理，此时的薛定谔方程被简化为
+其中$V$表示电子和原子核的相互作用势，在单独考虑其中一者时可以作为外场，此时原子核系统通过牛顿方程处理（类似于处理声子），电子系统通过薛定谔方程处理，此时的薛定谔方程被简化为
 
 $$\left(-\sum_i\frac{\hbar^2}{2m_e}\nabla_i^2+\frac12\sum_{i\neq j}\frac{e^2}{|\mathbf{r}_i-\mathbf{r}_j|}+\sum_iV_e(\mathbf{r}_i)\right)\psi(\mathbf{r},\mathbf{R})=E\psi(\mathbf{r},\mathbf{R})$$
 
@@ -57,7 +57,7 @@ $$\delta\left[\langle H\rangle-\sum_iE_i(\langle\varphi_i(\mathbf{r})|\varphi_i(
 
 $$\left(-\frac{\hbar^{2}}{2m_{e}}\nabla^{2}+V(\mathbf{r})+\sum_{i\neq i^{\prime}}\int\mathrm{dr}^{\prime}\frac{e^{2}|\varphi_{i}(\mathbf{r}^{\prime})|^{2}}{|\mathbf{r}-\mathbf{r}^{\prime}|}\right)\varphi_{i}(\mathbf{r})=E_{i}\varphi_{i}(\mathbf{r})$$
 
-方程左边分别是电子动能，晶格势能以及单电子与其他电子的平均势能。右侧\\(E_i\\)是单电子能量也是变分的拉格朗日乘子，由于式子中存在单电子波函数，因此需要给定初始状态，求解出有效势，再代入方程，反复迭代直到收敛（很明显可以使用计算机来处理了）。
+方程左边分别是电子动能，晶格势能以及单电子与其他电子的平均势能。右侧$E_i$是单电子能量也是变分的拉格朗日乘子，由于式子中存在单电子波函数，因此需要给定初始状态，求解出有效势，再代入方程，反复迭代直到收敛（很明显可以使用计算机来处理了）。
 
 由于电子是费米子，满足反对易关系，交换两个电子位置会产生负号，Fork在Hartree的基础上考虑反对易关系，将单电子波函数写成了Slater行列式的形式
 
@@ -90,10 +90,10 @@ E(\rho,V)& =\langle\varphi(\rho)|T+V_{ee}+V_{ext}|\varphi(\rho)\rangle   \\
 &=T(\rho)+\frac{1}{2}\int\mathrm{d}\mathbf{r}\mathrm{d}\mathbf{r}^{\prime}\frac{\rho(\mathbf{r})\rho(\mathbf{r}^{\prime})}{|\mathbf{r}-\mathbf{r}^{\prime}|}+E_{ex}(\rho)+\int\mathrm{d}\mathbf{r}V_{ext}(\mathbf{r})\rho(\mathbf{r})
 \end{aligned}$$
 
-其中 \\(E_{ex}(\rho)\\)表示电子间的交换关联能。
+其中 $E_{ex}(\rho)$表示电子间的交换关联能。
 
 ## Kohn-Sham 方程
-但是目前我们还不知道怎么用电子密度表示动能和关联能，Kohn和Sham提出使用无相互作用体系的动能泛函替代真实体系的动能泛函，把二者之差放到关联能中，从而变成单电子问题，\\(\rho\\)和\\(T(\rho)\\)可以进一步被写为（这里采用了原子单位）：
+但是目前我们还不知道怎么用电子密度表示动能和关联能，Kohn和Sham提出使用无相互作用体系的动能泛函替代真实体系的动能泛函，把二者之差放到关联能中，从而变成单电子问题，$\rho$和$T(\rho)$可以进一步被写为（这里采用了原子单位）：
 
 $$\begin{aligned}\rho(\mathbf{r})&=\sum_i|\varphi_i(\mathbf{r})|^2\\T_0(\rho)&=\sum_i\int\mathrm{d}^3\mathbf{r}\varphi_i^*(\mathbf{r})(-\nabla^2)\varphi_i(\mathbf{r})\end{aligned}$$
 

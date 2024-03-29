@@ -28,18 +28,18 @@ $$u_{n\mathbf{k}}(\mathbf{r})\to\sum_{m}U_{mn}(\mathbf{k})u_{m\mathbf{k}}(\mathb
 
 $$\omega_{n\mathbf{R}}(\mathbf{r})=\frac{V}{(2\pi)^3}\int_{\mathrm{BZ}}\mathrm{d}\mathbf{k}e^{-i\mathbf{k}\cdot\mathbf{R}}\left[\sum_{m}U_{mn}(\mathbf{k})\varphi_{m\mathbf{k}}(\mathbf{r})\right]$$
 
-由于\\(U_{mn}(\mathbf{k})\\)的存在导致Wannier函数具有不确定性，可以通过求解最局域的Wannier函数解决。
+由于$U_{mn}(\mathbf{k})$的存在导致Wannier函数具有不确定性，可以通过求解最局域的Wannier函数解决。
 
 ## 最大局域化万尼尔函数
 
-要想得到最局域的万尼尔函数，就需要将\\(U_{mn}(\mathbf{k})\\)最小化，为此可以使用SMV算法，在实空间定义一个表示Wannier函数展宽的函数\\(\Omega\\)，通过求其极小值来求最局域Wannier函数：
+要想得到最局域的万尼尔函数，就需要将$U_{mn}(\mathbf{k})$最小化，为此可以使用SMV算法，在实空间定义一个表示Wannier函数展宽的函数$\Omega$，通过求其极小值来求最局域Wannier函数：
 
 $$\begin{aligned}
 \Omega& =\sum_{n}\left[\langle\mathbf{r}^{2}\rangle_{n}-\langle\mathbf{r}\rangle_{n}^{2}\right]  \\
 &=\sum_{n}\left(\langle\omega_{n0}(\mathbf{r})|\mathbf{r}^{2}|\omega_{n0}(\mathbf{r})\rangle-|\langle\omega_{n0}(\mathbf{r})|\mathbf{r}|\omega_{n0}(\mathbf{r})\rangle|^{2}\right)
 \end{aligned}$$
 
-\\(\Omega\\)可以分为规范不变部分和以来相位的规范变换项，规范变换项又可以被分为对角项和非对角项，可以表示为
+$\Omega$可以分为规范不变部分和以来相位的规范变换项，规范变换项又可以被分为对角项和非对角项，可以表示为
 
 $$\begin{aligned}\Omega&=\Omega_I+\tilde{\Omega}\\&=\Omega_I+\Omega_D+\Omega_{OD}\end{aligned}$$
 
@@ -58,7 +58,7 @@ $$\begin{gathered}
 \langle\mathbf{r}^{2}\rangle_{n}={\frac{1}{N}}\sum_{\mathbf{k},\mathbf{b}}\omega_{\mathbf{b}}\left[2-2\mathrm{Re}\langle u_{n\mathbf{k}}|u_{n,\mathbf{k}+\mathbf{b}}\rangle\right] 
 \end{gathered}$$
 
-\\(b\\)是链接每个k和k'的矢量，\\(\omega\\)是权重，可以在离散化的布里渊区中定义交叠矩阵
+$b$是链接每个k和k'的矢量，$\omega$是权重，可以在离散化的布里渊区中定义交叠矩阵
 
 $$M_{mn}^{(\mathbf{k},\mathbf{b})}=\langle u_{m\mathbf{k}}|u_{n,\mathbf{k}+\mathbf{b}}\rangle$$ 
 
@@ -74,9 +74,9 @@ $$\begin{gathered}
 
  $$P^{(\mathbf{k})}=\sum_n|u_{n\mathbf{k}}\rangle\langle u_{n\mathbf{k}}|$$ 
  
-\\(Q^{(\mathbf{k})}=1-P^{(\mathbf{k})}\\),能带指标 \\(m,n=1,2,...,J\\)。先看 \\(\Omega_I\\) 项，如果 k 点和 k'点离得越近，其波函数的交叠矩阵的平方越大，\\(\Omega_I\\) 就越小；当它们完全重叠时，该项为 0, 因此\\(Tr([P^{(\mathrm{k})}Q^{(\mathrm{k}+\mathrm{b})}])\\) 测量的是 k 和 k+ b 的相邻布洛赫子空间之间的不匹配 (或“溢出”) 程度，这样我们就只需要优化 \\(\widetilde{\Omega}\\) 来得到最局域的万尼尔函数。
+$Q^{(\mathbf{k})}=1-P^{(\mathbf{k})}$,能带指标 $m,n=1,2,...,J$。先看 $\Omega_I$ 项，如果 k 点和 k'点离得越近，其波函数的交叠矩阵的平方越大，$\Omega_I$ 就越小；当它们完全重叠时，该项为 0, 因此$Tr([P^{(\mathrm{k})}Q^{(\mathrm{k}+\mathrm{b})}])$ 测量的是 k 和 k+ b 的相邻布洛赫子空间之间的不匹配 (或“溢出”) 程度，这样我们就只需要优化 $\widetilde{\Omega}$ 来得到最局域的万尼尔函数。
 
-最小化 \\(\Omega=\Omega_I+\widetilde{\Omega}\\) 的过程就是同时对希尔伯特子空间的选择和对规范选择的优化。优化完成后我们可以得到一组幺正矩阵\\(U(\mathbf{k})\\)满足：
+最小化 $\Omega=\Omega_I+\widetilde{\Omega}$ 的过程就是同时对希尔伯特子空间的选择和对规范选择的优化。优化完成后我们可以得到一组幺正矩阵$U(\mathbf{k})$满足：
 
 
 $$u_{n\mathbf{k}}^W=\sum_{m=1}^NU_{mn}(\mathbf{k})u_{m\mathbf{k}}$$
