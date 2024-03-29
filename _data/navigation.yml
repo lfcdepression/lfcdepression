@@ -13,15 +13,17 @@ main:
     url: /notes/
     
   - title: "Blog"
-    url: /year-archive/
+    url: /bolg/
 
   - title: "Art"
     url: /art/
+
+  - title: "Protfolio"
+    url: /protfolio/
     
   - title: "CV"
     url: /cv/
   
-  - title: "Protfolio"
-    url: /protfolio/
+
   #- title: "Guide"
   #  url: /markdown/
