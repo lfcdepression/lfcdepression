@@ -60,7 +60,7 @@ $$u=\sum_{\vec{q}\vec{k}\vec{k}^{\prime}\sigma\sigma^{\prime}}\upsilon_{\vec{q}}
 
 
 
-![2](BCS_files/image2.png)
+![2](../condensed_matter_theory/BCS_files/image2.png)
 
 
 
@@ -81,7 +81,7 @@ $$H_{int}=\sum_{k,k^{\prime},q,\sigma,\sigma^{\prime}}\frac{\mid D_q\mid^2\hbar 
 - $H_T=H_0^e+H_{\mathrm{~int~}}+u$不包含声子算符
 - 可以证明，只有波矢和自旋都相反的电子对交换声子产生的相互作用最强，因此我们只考虑这种情况
 
-![1](BCS_files/image3.png){:height="36px" width="16px"}
+![2](/BCS_files/image3.png){:height="36px" width="16px"}
 
 最后的超导哈密顿量可以写为
 
