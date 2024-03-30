@@ -69,6 +69,7 @@ plt.show()
 在这个过程中系统从$\mu$态转换到$\nu$的概率$P_{\mu\nu}$是恒定的，并且这个过程需要满足遍历性和平衡才能被没有问题的应用：
 - 1、首先，一个遍历性的过程是指，无论从哪个状态开始，经过足够长的时间后，都有概率到达另一个状态
 - 2、其次，两个状态之间的转换概率是相等的
+
 $$P_{\mu}P_{\mu\nu}=P_{\nu}P_{\nu\mu}$$
 
 对于单粒子翻转我们有：
@@ -80,9 +81,13 @@ $$P_\mu P_{\mu\nu}=P_\nu P_{\nu\mu}\quad\left(\frac{P_{\mu\nu}}{P_{\nu\mu}}=\fra
 $$\frac{P_{\mu\nu}}{P_{\nu\mu}}=\frac{g_{\mu\nu}A_{\mu\nu}}{g_{\nu\mu}A_{\nu\mu}}$$
 
 更进一步我们得到
+
 $$\frac{g_{\mu\nu}P_{\mu\nu}}{g_{\nu\mu}P_{\nu\mu}}=\frac{A_{\mu\nu}}{A_{\nu\mu}}=\frac{P_\mu}{P_\nu}=\mathrm{e}^{-\beta(E_\mu-E_\nu)}$$
+
 至此我们可以得到：
+
 $$\left.A(\Delta E)=\left\{\begin{matrix}1&\Delta E\leq0\\\mathrm{e}^{-\beta\Delta E}&\Delta E>0\end{matrix}\right.\right.$$
+
 最终算法可以被描述为：
 - 选取一个格点
 - 将格点进行翻转，并计算$\Delta E$.
@@ -193,7 +198,9 @@ plt.show()
 
 $$\frac{g_{\mu\nu}}{g_{\nu\mu}}=\frac{(1-P_{\mathrm{add}})^m}{(1-P_{\mathrm{add}})^n}=(1-P_{\mathrm{add}})^{m-n}$$
 
-更进一步我们有$$\frac{A_{\mu\nu}}{A_{\nu\mu}}=\frac{g_{\nu\mu}P_{\mu\nu}}{g_{\mu\nu}P_{\mu\nu}}=(1-P_{\mathrm{add}})^{n-m}\frac{P_{\mu\nu}}{P_{\nu\mu}}$$
+更进一步我们有
+
+$$\frac{A_{\mu\nu}}{A_{\nu\mu}}=\frac{g_{\nu\mu}P_{\mu\nu}}{g_{\mu\nu}P_{\mu\nu}}=(1-P_{\mathrm{add}})^{n-m}\frac{P_{\mu\nu}}{P_{\nu\mu}}$$
 
 同时，根据之前考虑单粒子翻转时的情况，我们得到了
 
@@ -201,7 +208,9 @@ $$\frac{P_{\mu\nu}}{P_{\nu\mu}}=\frac{P_{\nu}}{P_{\mu}}=\mathrm{e}^{-\beta\Delta
 
 
 至此，我们可以得到接受率为：
+
 $$\frac{A_{\mu\nu}}{A_{\nu\mu}}=\left[\mathrm{e}^{2\beta J}(1-P_{add})\right]^{n-m}$$
+
 直接取接受率为1，使问题最简化，也可以减少代码的复杂度（少一步判断），我们得到$P_{\mathrm{add}}=1-\mathrm{e}^{-2\beta J}$。
 
 至此算法已经准备好了，可以开始代码实现
