@@ -94,18 +94,122 @@ $$V_{\vec{k}\vec{k}^{\prime}}=\frac{2\mid D_q\mid^2\hbar \omega_{\vec{q}}}{(\var
 前一项来自于间接相互作用，后一项来源于电子间的Coulomb排斥，当$V_{\vec{k}\vec{k}^{\prime}}<0$时为净吸引作用，电子结合成Cooper对，是超导态电子；当$V_{\vec{k}\vec{k}^{\prime}}>0$时，两电子排斥，是正常态电子。
 
 ## BCS理论
+### Cooper对的能量
+电子间有净的吸引作用时，在Fermi面附近动量大小相等，方向相反、自旋相反的两个电子形成的束缚的电子对组态叫Cooper对。Cooper对形成超导电子基态能量肯定低于普通电子。
+
+Cooper讨论了$T=0K$, 在Fermi球外 附加上波矢为$\vec{k_{1}}$和$\vec{k_{2}}$两个电子的情形，费米球内的电子用自由电子气处理，占据球内所有能级，它们与球外的两个电子无相互作用。可对球外两附加电子$\vec{k_1}$和$\vec{k_2}$作二体问题处理。
+
+电子对1, 2自由运动时，波函数用平面波表示，电子对波函数是自由电子波函数 $\varphi_{\vec{k}_1}(\vec{r}_1)$ 和 $\varphi_{\vec{k}_2}(\vec{r}_2)$ 的组合。
 
 
-s
+$$\phi_{\vec{k}}(\vec{r}_1,\vec{r}_2)=\phi_{\vec{k}_1}(\vec{r}_1)\phi_{\vec{k}_2}(\vec{r}_2)=\frac1{V_c}e^{i(\vec{k}_1\cdot\vec{r}_1+\vec{k}_2\cdot\vec{r}_2)}=\frac1{V_c}e^{i\vec{K}\cdot(\vec{r}_1+\vec{r}_2)/2}e^{i\vec{k}\cdot(\vec{r}_1-\vec{r}_2)}$$
 
-s
-s
-s
-ss
+取质心坐标，则有
 
-s
-s
-s
-s
-s
-s
+$$\varphi_{\vec{k}}\left(\vec{r}_{1},\vec{r}_{2}\right)=\frac1{V_{c}}e^{i\vec{k}\cdot(\vec{r}_{1}-\vec{r}_{2})}$$
+
+计入电子1和2的相互作用时，它们就不自由了，不能用一个$\varphi_{\vec{k}}\left(\vec{r}_{1},\vec{r}_{2}\right)$表示，但可展开为所有$\varphi_{\vec{k}}\left(\vec{r}_{1},\vec{r}_{2}\right)$之线性组合。
+
+$$\psi(\vec{r}_1,\vec{r}_2)=\sum_{\vec{k}}g(\vec{k})\varphi_{\vec{k}}(\vec{r}_1,\vec{r}_2)$$
+
+此电子对的Schrödinger方程为 
+
+$$-\frac{\hbar^2}{2m}(\nabla_1^2+\nabla_2^2)\psi(\vec{r}_1,\vec{r}_2)+V(\vec{r}_1,\vec{r}_2)\psi(\vec{r}_1,\vec{r}_2)=(E+2\varepsilon_F)\psi(\vec{r}_1,\vec{r}_2)$$
+
+电子对的能量本征值的意义：Fermi球内能级已有电子占满，外加的两电子只能处于球外的能级，当此两电子在Fermi球面上时，能量为 2$\varepsilon_F$。E 是以 Fermi 面上的电子对的能量作零点算得的电子对能量。
+
+取相对坐标，代入薛定谔方程可以得到
+
+$$-\frac{\hbar^2}m\nabla^2\psi(\vec{r})+V(\vec{r})\psi(\vec{r})=(E+2\varepsilon_F)\psi(\vec{r})$$
+
+将线性组合的式子代入薛定谔方程，并且两边同时乘上$\psi^*$对全空间积分可以得到：
+
+$$\frac{\hbar^2k^2}mg(\vec{k})+\sum_{\vec{k}^{\prime}}g(\vec{k}^{\prime})V_{\vec{k},\vec{k}^{\prime}}=(E+2\varepsilon_F)g(\vec{k})$$
+
+其中
+
+$$V_{\vec{k},\vec{k}^{\prime}}=\frac1{V_{c}}\int V(\vec{r})e^{i(\vec{k}-\vec{k^{\prime}})\vec{r}}d^3r$$
+
+上式是 $\vec{k}$ 空间的Schrödinger方程，$g(\vec{k})$相当于 $\vec{k}$空间的波函数，解此方程关键是确定矩阵元$V_{\vec{k},\vec{k}^{\prime}}$，所以我们需要简化这个式子，$\vec{k}$和$\vec{k^{\prime}}$是单电子相对波矢，两个电子都处于Fermi球外，故电子通过交换虚声子$\vec{q}$改变波矢，而$q\leq q_{D}$，（$q_{D}$是Debye 波矢，是声子的最大波矢）,故 $k_F<\mid \vec{k}\mid ,\mid \vec{k}^{\prime}\mid<k_F+q_D$如取$\varepsilon_F=0$,则为 $0<\varepsilon(\vec{k}),\varepsilon(\vec{k^{\prime}})<\hbar\omega_D$。又有$k_{F}>q_{D}$,故$\vec{k},\vec{k}^{\prime}$ 只在很小范围内变化。
+
+因此可以取近似简化为
+
+$$V_{\vec{k},\vec{k}^{\prime}}=\begin{cases}-V&\quad k_F<|\vec{k}\mid,|\vec{k^{\prime}}|<k_F+q_D\\0&\quad\text{其他情况}&\end{cases}$$
+
+因此我们得到
+
+$$\left[E+2\varepsilon_F-\frac{\hbar^2k^2}m\right]g(\vec{k})=-V\sum_{\vec{k}^{\prime}}g(\vec{k}^{\prime})=-VC$$
+
+波函数可以写为
+
+$$g(\vec{k})=\frac{CV}{2\frac{\hbar^2k^2}{2m}-2\varepsilon_F-E}=\frac{CV}{2\varepsilon(\vec{k})-E}$$
+
+其中$\varepsilon(k)=\frac{\hbar^2k^2}{2m}-\varepsilon_F$是以$\varepsilon_F$为零点的一个自由电子的能量。
+
+再求和可以得到：
+
+$$\begin{aligned}CV\sum_{\vec{k}}\frac{1}{2\varepsilon(\vec{k})-E}&=\sum_{\vec{k}}g(\vec{k})=C\\\\V\sum_{\vec{k}}\frac{1}{2\varepsilon(\vec{k})-E}&=1\end{aligned}$$
+
+$E$处在求和号下面，要求出电子对的能量$E$ 需先对$\vec{k}$ 求和由于$\vec{k}$与 $\varepsilon(k)$一一对应，可用对能量空间的状态积分代替
+
+$$\sum_k\to\int N(\varepsilon)d\varepsilon $$
+
+根据前面的条件我们可以得到
+
+$$V\int_0^{\hbar\omega_D}\frac1{2\varepsilon-E}N\left(\varepsilon\right)d\varepsilon=1$$
+
+在数量级上$\varepsilon_F\sim1-10eV,\hbar\omega_D\sim10^{-2}eV$,有 $h\omega_D<<\varepsilon_F$ 即能量$\varepsilon$ 的变化范围很窄，可用Fermi面附近状态密度 $N(0)$代替 $N(\varepsilon)$
+
+进行这个代换之后积分可以得到
+
+$$\frac{N(0)V}2\mathrm{ln}\frac{E-2\hbar\omega_D}E=1$$
+
+也就是
+
+$$E=2\hbar\omega_D{\left[1-\exp\left(\frac2{N(0)V}\right)\right]^{-1}}$$
+
+弱耦合情况下我们有
+
+$$E=-2\hbar\omega_D\exp\left(-\frac2{N(0)V}\right){<0}$$
+
+### 什么电子形成Cooper对
+
+首先必须满足动量守恒和能量守恒
+
+$$\hbar(\vec{k_1}+\vec{k_2})=\hbar(\vec{k_1^{\prime}}+\vec{k_2^{\prime}})=\hbar\vec{K}$$
+
+由于交换虚声子产生作用，因此能量受到限制
+
+$$\left(\hbar\omega_q\right)_{\mathrm{max}}=\hbar\omega_D$$
+
+结合这两个条件我们有$\Delta k$需要满足$\varepsilon=\frac{\hbar^2k^2}{2m}$得到$\Delta\varepsilon=\frac{1}{m}\hbar^2k\Delta k$，也就是$\Delta k=\frac{m}{\hbar^2k}\Delta\varepsilon$，而极限情况下$\Delta\varepsilon=\hbar\omega_D$，所以最大的$\Delta k=\frac{m\omega_D}{\hbar k_F}$
+
+因此$:\vec{k}_1,\vec{k}_2,\vec{k}_1^{\prime},\vec{k}_2^{\prime}$只有落在两球壳交叠区才能同时满足 
+
+
+![4](condensed_matter_theory/BCS_files/image4.png){:height="360px" width="720px"}
+
+### Bardeen, Cooper, Schrieffer Theory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
