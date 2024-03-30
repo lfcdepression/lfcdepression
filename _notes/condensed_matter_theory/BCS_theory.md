@@ -58,7 +58,9 @@ $$u=\sum_{\vec{q}\vec{k}\vec{k}^{\prime}\sigma\sigma^{\prime}}\upsilon_{\vec{q}}
 
 波矢分别为$\vec{k}$ 和$\vec{k}^{\prime}$的一对电子由于Coulomb排斥，交换能量$\hbar\omega_{\vec{q}}$ 后分别处于波矢为$(\vec{k}-\vec{q})$和 $(\vec{k}+\vec{q})$ 的状态。式中$\upsilon_{\vec{q}}$为Coulomb势，应包括屏蔽效应，用一个介电函数描述。
 
-![png2](/BCS_files/image2.png)
+
+
+![png2](BCS_files/image2.png)
 
 
 
@@ -79,7 +81,7 @@ $$H_{int}=\sum_{k,k^{\prime},q,\sigma,\sigma^{\prime}}\frac{\mid D_q\mid^2\hbar 
 - $H_T=H_0^e+H_{\mathrm{~int~}}+u$不包含声子算符
 - 可以证明，只有波矢和自旋都相反的电子对交换声子产生的相互作用最强，因此我们只考虑这种情况
 
-![png3](/BCS_files/image3.png){:height="36px" width="16px"}
+![png3](BCS_files/image3.png){:height="36px" width="16px"}
 
 最后的超导哈密顿量可以写为
 
