@@ -48,7 +48,7 @@ $$H_1=\sum_{\vec{q}\vec{k}\sigma}\left\lfloor D_{\vec{q}}C_{\vec{k}+\vec{q},\sig
 
 式中$D_{\vec{q}}=i(\hbar/2M\omega_{\vec{q}})^{1/2}\mid\vec{q}\mid C,M$ 为原子质量，$C$ 为常数，$C\sim-2\varepsilon_F/3$
 
-![png](BCS/image1.png)
+![png](_notes\凝聚态理论\BCS\image2.png)
 
 左图为波矢为$k$ 的电子吸收一个波矢为$\vec{q}$ 的声子，产生一个波矢为$\vec{k}+\vec{q}$ 的电子，同时，波矢为$\vec{k}$ 的电子，波矢为$\vec{q}$ 的声子被消灭。右图为波矢为$\vec{k}$ 的电子，放出一个波矢为$\vec{q}$ 的声子，变为波矢为$k-\vec{q}$ 的电子。同时波矢为$k$ 的电子被消灭。
 
