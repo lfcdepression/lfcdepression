@@ -48,7 +48,7 @@ $$H_1=\sum_{\vec{q}\vec{k}\sigma}\left\lfloor D_{\vec{q}}C_{\vec{k}+\vec{q},\sig
 
 式中$D_{\vec{q}}=i(\hbar/2M\omega_{\vec{q}})^{1/2}\mid\vec{q}\mid C,M$ 为原子质量，$C$ 为常数，$C\sim-2\varepsilon_F/3$
 
-![image1](/_notes/BCS_files/image1.png)
+![image1](BCS_files/image1.png)
 
 左图为波矢为$k$ 的电子吸收一个波矢为$\vec{q}$ 的声子，产生一个波矢为$\vec{k}+\vec{q}$ 的电子，同时，波矢为$\vec{k}$ 的电子，波矢为$\vec{q}$ 的声子被消灭。右图为波矢为$\vec{k}$ 的电子，放出一个波矢为$\vec{q}$ 的声子，变为波矢为$k-\vec{q}$ 的电子。同时波矢为$k$ 的电子被消灭。
 
@@ -56,7 +56,7 @@ $$H_1=\sum_{\vec{q}\vec{k}\sigma}\left\lfloor D_{\vec{q}}C_{\vec{k}+\vec{q},\sig
 
 $$u=\sum_{\vec{q}\vec{k}\vec{k}^{\prime}\sigma\sigma^{\prime}}\upsilon_{\vec{q}}C_{\vec{k}-\vec{q},\sigma}^{\dagger}C_{\vec{k}^{\prime}+\vec{q},\sigma^{\prime}}^{\dagger}C_{\vec{k}^{\prime},\sigma^{\prime}}C_{k\sigma}$$
 
-![Image2](/_notes/BCS_files/image2.png)
+![Image2](BCS_files/image2.png)
 
 波矢分别为$\vec{k}$ 和$\vec{k}^{\prime}$的一对电子由于Coulomb排斥，交换能量$\hbar\omega_{\vec{q}}$ 后分别处于波矢为$(\vec{k}-\vec{q})$和 $(\vec{k}+\vec{q})$ 的状态。式中$\upsilon_{\vec{q}}$为Coulomb势，应包括屏蔽效应，用一个介电函数描述。
 
@@ -77,7 +77,7 @@ $$H_{int}=\sum_{k,k^{\prime},q,\sigma,\sigma^{\prime}}\frac{\mid D_q\mid^2\hbar 
 - $H_T=H_0^e+H_{\mathrm{~int~}}+u$不包含声子算符
 - 可以证明，只有波矢和自旋都相反的电子对交换声子产生的相互作用最强，因此我们只考虑这种情况
 
-![image3](/_notes/BCS_files/image3.png)
+![image3](BCS_files/image3.png)
 
 最后的超导哈密顿量可以写为
 
