@@ -697,8 +697,8 @@ plt.show()
 ```
 
 
-<div align=center> <img src="ising_files/ising_17_0.png" width = 100%/> </div>    
-
+  
+![png](ising_files/ising_17_0.png)
     
 文中的函数可以在[Ising模型构建及性质计算](ising_files/ising.py)中得到，还可以基于此计算其他的性质。
 
