@@ -63,7 +63,9 @@ h_{i}^{\prime} &=\psi_h(\{m_{ij}\}_{j\in\mathcal{N}(i)},h_i) \\
 -  $\psi_\mathrm{m}$ 对输入$(\mathbf{x}_i,\mathbf{x}_j)$是G-equivariant的
 -  $\psi_\mathrm{x}$对输入$\{\mathbf{m_{ij}}\}$$_{j\in N(i)}$ 和$\mathbf{x_i}$ 是G-equivariant的
 
-![1](机器学习/Equivariant_GNN/image1.png){:height="720px" width="240px"}
+![1](machine_learning/Equivariant/image1.png){:height="720px" width="240px"}
+
+
 
 图示为旋转情况下几何等变消息传递的图示。生成标量消息和矢量消息，然后进行聚合，从而产生等变更新。平移等变性是容易实现的，因为训练模型基本都是使用相对位置，因此我们主要考虑旋转等操作，根据消息的表示方式，将当前的方法分为三类：不可约表示（irreducible representation），正则表示（regular representation），标量化（scalarization）
 
