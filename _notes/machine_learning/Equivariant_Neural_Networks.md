@@ -63,7 +63,7 @@ h_{i}^{\prime} &=\psi_h(\{m_{ij}\}_{j\in\mathcal{N}(i)},h_i) \\
 -  $\psi_\mathrm{m}$ 对输入$(\mathbf{x}_i,\mathbf{x}_j)$是G-equivariant的
 -  $\psi_\mathrm{x}$对输入$\{\mathbf{m_{ij}}\}$$_{j\in N(i)}$ 和$\mathbf{x_i}$ 是G-equivariant的
 
-![1](machine_learning/Equivariant/image1.png){:height="720px" width="240px"}
+![1](machine_learning/Equivariant_GNN/image1.png){:height="720px" width="240px"}
 
 
 
