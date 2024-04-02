@@ -57,7 +57,7 @@ h_{i}^{\prime} &=\psi_h(\{m_{ij}\}_{j\in\mathcal{N}(i)},h_i) \\
 \mathbf{x}_i^{\prime} &=\psi_{\mathbf{x}}(\{\mathbf{m}_{ij}\}_{j\in\mathcal{N}(i)},\mathbf{x}_i) 
 \end{gathered}$$
 
-其中，$m_{ij}$和$\mathbf{m}_{ij}$分别是通过边$(i,j)$传递的标量和方向输出，$\psi_h$ 和$\psi_\mathbf{x}$分别是用于标量特征和几何矢量特征的消息聚合函数。另外：
+其中，$m_{ij}$和$\mathbf{m_{ij}}$分别是通过边$(i,j)$传递的标量和方向输出，$\psi_h$ 和$\psi_\mathbf{x}$分别是用于标量特征和几何矢量特征的消息聚合函数。另外：
 
 - $\psi_m$ 对输入$(\mathbf{x}_i,\mathbf{x}_j)$是G-invariant的
 -  $\psi_\mathrm{m}$ 对输入$(\mathbf{x}_i,\mathbf{x}_j)$是G-equivariant的
