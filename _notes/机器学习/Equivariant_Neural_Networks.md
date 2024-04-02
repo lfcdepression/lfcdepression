@@ -61,9 +61,9 @@ h_{i}^{\prime} &=\psi_h(\{m_{ij}\}_{j\in\mathcal{N}(i)},h_i) \\
 
 - $\psi_m$ 对输入$(\mathbf{x}_i,\mathbf{x}_j)$是G-invariant的
 -  $\psi_\mathrm{m}$ 对输入$(\mathbf{x}_i,\mathbf{x}_j)$是G-equivariant的
--  $\psi_\mathrm{x}$对输入$\{\mathbf{m}_{ij}\}_{j\in N(i)}$ 和$\mathbf{x}_i$ 是G-equivariant的
+-  $\psi_\mathrm{x}$对输入$\{\mathbf{m_{ij}}\}$$_{j\in N(i)}$ 和$\mathbf{x_i}$ 是G-equivariant的
 
-![1](/_notes/机器学习/Equivariant_GNN/image1.png){:height="720px" width="240px"}
+![1](机器学习/Equivariant_GNN/image1.png){:height="720px" width="240px"}
 
 图示为旋转情况下几何等变消息传递的图示。生成标量消息和矢量消息，然后进行聚合，从而产生等变更新。平移等变性是容易实现的，因为训练模型基本都是使用相对位置，因此我们主要考虑旋转等操作，根据消息的表示方式，将当前的方法分为三类：不可约表示（irreducible representation），正则表示（regular representation），标量化（scalarization）
 
@@ -81,7 +81,7 @@ $$\mathbf{D}^k(g)\otimes \mathbf{D}^l(g)=(\mathbf{C}^{lk})^{\mathrm{T}}\left(\bi
 
 $$\begin{aligned}\mathbf{m}_{ij}^l&=\sum_{k\geq0}\mathbf{W}^{lk}(\mathbf{x}_i-\mathbf{x}_j)\mathbf{x}_j^k\\\mathbf{x}_i^{\prime l}&=\omega_{ll}\mathbf{x}_i^l+\sum_{j\in\mathcal{N}_{(i)}}\mathbf{m}_{ij}\end{aligned}$$
 
-其中，$\mathbf{x}_i^{\prime l}\in\mathbb{R}^{2l+1}$表示度为 $l$ 的节点$i$的几何向量，$\mathrm{x}_i\in\mathbb{R}^3$ 为节点坐标，$\omega_{ll}$为自作用权重，filter $\mathbf{W}^{lk}\in\mathbb{R}^{(2l+1)\times(2k+1)}$是旋转可引导的(rotation-steerable),表明对于任意旋转 $r\in SO(3)$,满足$\mathbf{W}^{lk}(\mathbf{D}^1(r)\mathbf{x})=\mathbf{D}^1(r)\mathbf{W}^{lk}(\mathbf{x})(\mathbf{D}^k(r))^{-1}$ 。具体来说：
+其中，$\mathbf{x_i}^{\prime l}\in\mathbb{R}^{2l+1}$表示度为 $l$ 的节点$i$的几何向量，$\mathrm{x_i}\in\mathbb{R}^3$ 为节点坐标，$\omega_{ll}$为自作用权重，filter $\mathbf{W}^{lk}\in\mathbb{R}^{(2l+1)\times(2k+1)}$是旋转可引导的(rotation-steerable),表明对于任意旋转 $r\in SO(3)$,满足$\mathbf{W}^{lk}(\mathbf{D}^1(r)\mathbf{x})=\mathbf{D}^1(r)\mathbf{W}^{lk}(\mathbf{x})(\mathbf{D}^k(r))^{-1}$ 。具体来说：
 
 $$\mathbf{W}^{lk}=\sum_{J=|l-k|}^{l+k}\varphi_J^{lk}(||\mathbf{x}||)\sum_{m=-J}^{J}Y_{Jm}(\mathbf{x}/||\mathbf{x}||)\mathbf{C}_{Jm}^{lk}$$
 
@@ -106,8 +106,9 @@ m_{ij}=\varphi_m(h_i,h_j,||\boldsymbol{x}_i-\boldsymbol{x}_j||,e_{ij}), \\
 h_i^{\prime}=\varphi_h(h_i,\sum_{j\in\mathcal{N}(i)}m_{ij}) 
 \end{gathered}$$
 
-其中，$||x_i-x_j||$是几何向量$x_i$和$x_j$的标量化形式；$\varphi_m$、$\varphi_x$和$\varphi_h$都是任意的MLPs。通过设置$m_{ij}=(x_i-x_j)\varphi_x(m_{ij})$, EGNN同时传播了节点特征$h_i$和几何向量$x_i$,以等变的方式直接实现了Eq.(4-7)。这个方法的精髓在于构建不变的信息$m_{ij}$,然后沿着径向方向(radial dirction)重新转换回到等变的输出，与我们计算两个带电粒子的库伦力(重力)类似。
+其中，$\mid\mid x_i-x_j\mid\mid$是几何向量$x_i$和$x_j$的标量化形式；$\varphi_m$、$\varphi_x$和$\varphi_h$都是任意的MLPs。通过设置$m_{ij}=(x_i-x_j)\varphi_x(m_{ij})$, EGNN同时传播了节点特征$h_i$和几何向量$x_i$,以等变的方式直接实现了图结构。这个方法的精髓在于构建不变的信息$m_{ij}$,然后沿着径向方向(radial dirction)重新转换回到等变的输出，与我们计算两个带电粒子的库伦力(重力)类似。
 
 ## 参考文献
 [1] Han, J., Rong, Y., Xu, T., & Huang, W. (2022). Geometrically Equivariant Graph Neural Networks: A Survey. ArXiv, abs/2202.07230.
+
 [2] [论文笔记：几何等变图神经网络综述](https://gabriel-qin.github.io/2023/06/03/Survey-Geometrically-Equivariant-GNN/)
