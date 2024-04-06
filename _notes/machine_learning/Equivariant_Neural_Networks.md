@@ -75,7 +75,7 @@ h_{i}^{\prime} &=\psi_h(\{m_{ij}\}_{j\in\mathcal{N}(i)},h_i) \\
 
 $$\rho(g)=\mathbf{Q}^{\mathsf{T}}\left(\underset{l}{\bigoplus}\mathbf{D}^{l}(g)\right)\mathbf{Q}$$
 
-其中，$\mathbf{D}^{l}$是Wigner-D矩阵，$\mathbf{Q}$是正交矩阵表示基的变换，$\bigoplus$为直接求和或者矩阵沿对角线拼接。因此，向量空间被分为了$l$ 个子空间，每一个都被$\mathbf{D}^l$所变换，第$l$ 子空间中的向量被称为 $type$-$l$ 向量。例如，在我们的例子中，标量$h_i$是含有$H$个通道的type-0向量，$\mathbf{x}_i$是type-1向量。这些向量通过张量积$\otimes$ 互相作用，然后通过Wigner-D 矩阵的张量积得到 Clebsch-Gordan (CG) 相关系数$\mathbf{C}^{lk}\in\mathbb{R}^{(2l+1)(2k+1)\times(2l+1)(2k+1)}$, 由CG分解所得：
+其中，$\mathbf{D}^{l}$是[Wigner-D矩阵](https://lfcdepression.github.io/notes/D_matrix)，$\mathbf{Q}$是正交矩阵表示基的变换，$\bigoplus$为直接求和或者矩阵沿对角线拼接。因此，向量空间被分为了$l$ 个子空间，每一个都被$\mathbf{D}^l$所变换，第$l$ 子空间中的向量被称为 $type$-$l$ 向量。例如，在我们的例子中，标量$h_i$是含有$H$个通道的type-0向量，$\mathbf{x}_i$是type-1向量。这些向量通过张量积$\otimes$ 互相作用，然后通过Wigner-D 矩阵的张量积得到 Clebsch-Gordan (CG) 相关系数$\mathbf{C}^{lk}\in\mathbb{R}^{(2l+1)(2k+1)\times(2l+1)(2k+1)}$, 由CG分解所得：
 
 $$\mathbf{D}^k(g)\otimes \mathbf{D}^l(g)=(\mathbf{C}^{lk})^{\mathrm{T}}\left(\bigoplus_{J=|k-l|}^{k+l}\mathbf{D}^J(g)\right)\mathbf{C}^{lk}$$
 
@@ -114,7 +114,3 @@ h_i^{\prime}=\varphi_h(h_i,\sum_{j\in\mathcal{N}(i)}m_{ij})
 [1] Han, J., Rong, Y., Xu, T., & Huang, W. (2022). Geometrically Equivariant Graph Neural Networks: A Survey. ArXiv, abs/2202.07230.
 
 [2] [论文笔记：几何等变图神经网络综述](https://gabriel-qin.github.io/2023/06/03/Survey-Geometrically-Equivariant-GNN/)
-
-## Extension
-
-**可以在机器学习中表示各种对称性来提升学习能力，或许可以用来提升转角体系的学习能力**

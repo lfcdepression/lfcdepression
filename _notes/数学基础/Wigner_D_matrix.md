@@ -123,8 +123,14 @@ $$\chi^j(\beta)\equiv\sum_mD_{mm}^j(\beta)=\sum_md_{mm}^j(\beta)=\frac{\sin\left
 
 $$\frac1\pi\int_0^{2\pi}d\beta\sin^2\left(\frac\beta2\right)\chi^j(\beta)\chi^{j^{\prime}}(\beta)=\delta_{j^{\prime}j}$$
 
+## 张量积，Clebsch-Gordan级数
+$$\mathbf{D}^j(\alpha,\beta,\gamma)\otimes\mathbf{D}^{j^{\prime}}(\alpha,\beta,\gamma)$$
 
+形成SO(3)和SU(2)的可约群表示，还原为不可约成分得到
 
+$$D_{mk}^j(\alpha,\beta,\gamma)D_{m^{\prime}k^{\prime}}^{j^{\prime}}(\alpha,\beta,\gamma)=\sum_{J=|j-j^{\prime}|}^{j+j^{\prime}}\langle jmj^{\prime}m^{\prime}|J\left(m+m^{\prime}\right)\rangle\langle jkj^{\prime}k^{\prime}|J\left(k+k^{\prime}\right)\rangle D_{(m+m^{\prime})(k+k^{\prime})}^{J}(\alpha,\beta,\gamma)$$
+
+其中$\langle j_1m_1j_2m_2\mid j_3m_3\rangle $称为Clebsch-Gordan系数（CG系数）
 ## 参考文献
 [维基百科](https://en.wikipedia.org/wiki/Wigner_D-matrix)
 
