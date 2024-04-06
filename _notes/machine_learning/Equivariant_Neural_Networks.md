@@ -114,3 +114,7 @@ h_i^{\prime}=\varphi_h(h_i,\sum_{j\in\mathcal{N}(i)}m_{ij})
 [1] Han, J., Rong, Y., Xu, T., & Huang, W. (2022). Geometrically Equivariant Graph Neural Networks: A Survey. ArXiv, abs/2202.07230.
 
 [2] [论文笔记：几何等变图神经网络综述](https://gabriel-qin.github.io/2023/06/03/Survey-Geometrically-Equivariant-GNN/)
+
+## Extension
+
+**可以在机器学习中表示各种对称性来提升学习能力，或许可以用来提升转角体系的学习能力**
