@@ -39,7 +39,7 @@ $$d_{m^{\prime}m}^j(\beta)=\langle jm^{\prime}|e^{-i\beta J_y}|jm\rangle=D_{m^{\
 
 是Wigner (small) d-matrix。
 
-并且D_{m^{\prime}m}^j(\alpha,0,0)有与$D_{m^{\prime}m}^j(0,\beta,0)$不同的正交归一性质（对角矩阵）
+并且$D_{m^{\prime}m}^j(\alpha,0,0)$有与$D_{m^{\prime}m}^j(0,\beta,0)$不同的正交归一性质（对角矩阵）
 
 $$D_{m^{\prime}m}^j(\alpha,0,0)=e^{-im^{\prime}\alpha}\delta_{m^{\prime}m}$$
 
