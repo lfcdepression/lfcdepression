@@ -6,5 +6,5 @@ redirect_from:
   - /about/
   - /about.html
 ---
-##  
+## 研究方向
 一个文艺的理工男
