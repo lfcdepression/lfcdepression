@@ -43,25 +43,25 @@ $$\begin{equation}
     p(x_{t-1}\mid x_t=z)
 \end{equation}$$
 
-这显然是一个正确的反向采样器。问题在于，它需要为每个 $x_t$ 学习条件分布 $p(x_{t−1} | x_t)$ 的生成模型，这可能会很复杂。但是，如果每步的噪声 $\sigma$ 足够小，那么这个条件分布会变得简单：
+这显然是一个正确的反向采样器。问题在于，它需要为每个 $x_t$ 学习条件分布 $p(x_{t−1} \vert  x_t)$ 的生成模型，这可能会很复杂。但是，如果每步的噪声 $\sigma$ 足够小，那么这个条件分布会变得简单：
 
-**Fact1：(Diffusion Reverse Process)** 对于小的 $\sigma$ 和在（1）中定义的高斯扩散过程，条件分布 $p(x_{t−1} | x_t)$  本身接近高斯分布。也就是说，对于所有时间 $t$ 和条件 $z ∈ \mathbb{R}^d$，存在一些均值参数 $\mu \in \mathbb{R}^d$  使得：
+**Fact1：(Diffusion Reverse Process)** 对于小的 $\sigma$ 和在（1）中定义的高斯扩散过程，条件分布 $p(x_{t−1} \vert  x_t)$  本身接近高斯分布。也就是说，对于所有时间 $t$ 和条件 $z ∈ \mathbb{R}^d$，存在一些均值参数 $\mu \in \mathbb{R}^d$  使得：
 
 $$\begin{equation}
     p(x_{t-1}\mid x_{t}=z)\approx\mathcal{N}(x_{t-1}; \mu , \sigma^{2})
 \end{equation}$$
 
-这是一个nontrivial的结果，我们将在后面证明它，这个结果带来了一个重大的简化：我们不在需要从头开始学习任意分布$p(x_{t−1} | x_t)$，我们现在对于这个分布除了均值都已经了解了，我们使用$\mu_{t-1}(x_t)$表示其均值（均值$μ_{t−1} : \mathbb{R}^d \rightarrow \mathbb{R}^d$，因为$p(x_{t−1} | x_t)$的均值取决于时间$t$和条件$x_t$）。当$\sigma$足够小时，我们可以将后验分布近似为高斯分布，因此**只要得到条件分布的均值，就可以完整学习这个条件分布**。
+这是一个nontrivial的结果，我们将在后面证明它，这个结果带来了一个重大的简化：我们不在需要从头开始学习任意分布$p(x_{t−1} \vert  x_t)$，我们现在对于这个分布除了均值都已经了解了，我们使用$\mu_{t-1}(x_t)$表示其均值（均值$μ_{t−1} : \mathbb{R}^d \rightarrow \mathbb{R}^d$，因为$p(x_{t−1} \vert  x_t)$的均值取决于时间$t$和条件$x_t$）。当$\sigma$足够小时，我们可以将后验分布近似为高斯分布，因此**只要得到条件分布的均值，就可以完整学习这个条件分布**。
 
 ![高斯反向过程](diffusion_elimentary/p2.png)
 
-学习 $p(x_{t−1} | x_t)$ 的均值要比学习完整的条件分布简单得多，可以通过回归方法解决。具体而言，我们有一个联合分布 $(x_{t−1}, x_t)$，我们很容易可以从中采样，并且我们希望估计 $E[x_{t−1} | x_t]$。这可以通过优化标准的回归损失来实现：
+学习 $p(x_{t−1} \vert  x_t)$ 的均值要比学习完整的条件分布简单得多，可以通过回归方法解决。具体而言，我们有一个联合分布 $(x_{t−1}, x_t)$，我们很容易可以从中采样，并且我们希望估计 $E[x_{t−1} \vert  x_t]$。这可以通过优化标准的回归损失来实现：
 
 $$\begin{equation}
     \begin{aligned}
 \mu_{t-1}(z)& :=\mathbb{E}[x_{t-1}\mid x_t=z] \\
-\Longrightarrow\mu_{t-1}& =\underset{f:\mathbb{R}^d\to\mathbb{R}^d}{\operatorname*{argmin}}\quad\underset{x_t,x_{t-1}}{\operatorname*{E}}||f(x_t)-x_{t-1}||_2^2 \\
-&=\underset{f:\mathbb{R}^d\to\mathbb{R}^d}{\operatorname*{argmin}}\underset{x_{t-1},\eta}{\operatorname*{\mathbb{E}}}||f(x_{t-1}+\eta_t)-x_{t-1}||_2^2,
+\Longrightarrow\mu_{t-1}& =\underset{f:\mathbb{R}^d\to\mathbb{R}^d}{\operatorname*{argmin}}\quad\underset{x_t,x_{t-1}}{\operatorname*{E}}\vert \vert f(x_t)-x_{t-1}\vert \vert _2^2 \\
+&=\underset{f:\mathbb{R}^d\to\mathbb{R}^d}{\operatorname*{argmin}}\underset{x_{t-1},\eta}{\operatorname*{\mathbb{E}}}\vert \vert f(x_{t-1}+\eta_t)-x_{t-1}\vert \vert _2^2,
 \end{aligned}
 \end{equation}$$
 
@@ -128,7 +128,7 @@ $$\begin{equation}
  对于每个时间步 $t\in{0,\Delta t,...,1−\Delta t}$都有一个$\{μ_t\}$。在训练阶段，我们通过优化如下去噪回归目标来从 $x_0 $的独立同分布样本估计这些函数：
 
 $$\begin{equation}
-    \mu_t=\underset{f:\mathbb{R}^d\to\mathbb{R}^d}{\operatorname*{argmin}}\underset{x_t,x_{t+\Delta t}}{\operatorname*{\mathbb{E}}}||f(x_{t+\Delta t})-x_t||_2^2
+    \mu_t=\underset{f:\mathbb{R}^d\to\mathbb{R}^d}{\operatorname*{argmin}}\underset{x_t,x_{t+\Delta t}}{\operatorname*{\mathbb{E}}}\vert \vert f(x_{t+\Delta t})-x_t\vert \vert _2^2
 \end{equation}$$
 
 通常使用参数化$f$的神经网络，在使用中，通常会共享参数来学习不同的回归函数$\{μ_t\}$，而不是独立为每个时间步学习单独的函数，通常训练一个模型$f_{\theta}$，该模型接受时间$t$作为额外参数，并且满足$f_{\theta}(x_t,t)=\mu_t(x_t)$来实现。在推理阶段，我们使用估计的函数来实现反向采样器：
@@ -139,7 +139,7 @@ $$\widehat{x}_{t-\Delta t}\leftarrow\mu_{t-\Delta t}(x_t)+\mathcal{N}(0,\sigma_q
 
 实际生成样本需要从各向同性的高斯分布中采样$x_1\sim\mathcal{N}(0,\sigma_q^2)$，然后运行 **Algorithm 1** 迭代直到$t=0$以生成样本$x_0$
 
-我们想推理这个过程的正确性：为什么迭代算法**Algorithm 1**可以近似生成一个来自目标分布$p$的样本？我们需要证明某种形式的**Fact 1**，即真实条件分布$p(x_{t-\Delta t}| x_t)$可以很好近似为高斯分布，并且随着$\Delta t \rightarrow 0$这种近似会更加准确。
+我们想推理这个过程的正确性：为什么迭代算法**Algorithm 1**可以近似生成一个来自目标分布$p$的样本？我们需要证明某种形式的**Fact 1**，即真实条件分布$p(x_{t-\Delta t}\vert  x_t)$可以很好近似为高斯分布，并且随着$\Delta t \rightarrow 0$这种近似会更加准确。
 
 ### 2.1 DDPM 的正确性
 
@@ -164,5 +164,5 @@ $$\begin{equation}
 **Claim 1**(Informal)的证明：这里是为什么分数出现在反向过程中的启发性论证。我们基本上只需应用贝叶斯规则，然后适当地进行泰勒展开。我们从贝叶斯规则开始：
 
 $$\begin{equation}
-    p(x_{t-\Delta t}|x_t)=p(x_t|x_{t-\Delta t})p_{t-\Delta t}(x_{t-\Delta t})/p_t(x_t)
-\end{equation}$$
+    p(x_{t-\Delta t}\vert x_t)=p(x_t\vert x_{t-\Delta t})p_{t-\Delta t}(x_{t-\Delta t})/p_t(x_t)
+\end{equation}$$ 
