@@ -15,6 +15,7 @@ date: 2024-08-02
   - [1.3 离散化](#13-离散化)
 - [2 随机采样：DDPM](#2-随机采样ddpm)
   - [2.1 DDPM 的正确性](#21-ddpm-的正确性)
+  - [2.2 算法](#22-算法)
 
 ## 1 扩散模型基础
 
@@ -166,3 +167,44 @@ $$\begin{equation}
 $$\begin{equation}
     p(x_{t-\Delta t}\vert x_t)=p(x_t\vert x_{t-\Delta t})p_{t-\Delta t}(x_{t-\Delta t})/p_t(x_t)
 \end{equation}$$ 
+
+然后对两边取对数。在整个过程中，我们会忽略对数中的任何加法常数（这些对应于归一化因子），并且放弃所有 $\mathcal{O}(\Delta t)$ 阶的项。注意，在这个推导中，我们应将 $x_t$ 视为常数，因为我们希望理解条件概率作为 $x_{t−Δt}$ 的函数。
+
+$$\begin{equation}
+    \begin{aligned}
+&\log p(x_{t-\Delta t}\vert x_t)=\log p(x_t\vert x_{t-\Delta t})+\log p_{t-\Delta t}(x_{t-\Delta t})-\log p_t(x_t) \\
+&=\log p(x_t\vert x_{t-\Delta t})+\log p_t(x_{t-\Delta t})+\mathcal{O}(\Delta t) \\
+&=-\frac1{2\sigma_q^2\Delta t}\vert \vert x_{t-\Delta t}-x_t\vert \vert _2^2+\log p_t(x_{t-\Delta t}) \\
+&=-\frac1{2\sigma_q^2\Delta t}\vert \vert x_{t-\Delta t}-x_t\vert \vert _2^2 \\
+&+\log p_t(x_t)+\langle\nabla_x\log p_t(x_t),(x_{t-\Delta t}-x_t)\rangle+\mathcal{O}(\Delta t) \\
+&=-\frac1{2\sigma_q^2\Delta t}\left(\vert \vert x_{t-\Delta t}-x_t\vert \vert _2^2-2\sigma_q^2\Delta t\langle\nabla_x\log p_t(x_t),(x_{t-\Delta t}-x_t)\rangle\right) \\
+&=-\frac1{2\sigma_q^2\Delta t}\vert \vert x_{t-\Delta t}-x_t-\sigma_q^2\Delta t \nabla_x\log p_t(x_t)\vert \vert _2^2+C \\
+&=-\frac1{2\sigma_q^2\Delta t}\vert \vert x_{t-\Delta t}-\mu\vert \vert _2^2
+\end{aligned}
+\end{equation}$$
+
+这与具有均值 $\mu$ 和方差 $\sigma_{q}^{2}\Delta t$ 的正态分布的对数密度相同，差别仅在于加法因子。因此
+
+$$\begin{equation}
+    p(x_{t-\Delta t}\mid x_t)\approx\mathcal{N}(x_{t-\Delta t}; \mu,\sigma_q^2\Delta t)
+\end{equation}$$
+
+思考这个推导，其主要思想是对于足够小的 $\Delta t$，反向过程 $p(x_{t-Δt} \vert x_t)$ 的贝叶斯规则展开由正向过程中的项 $p(x_t \vert  x_{t-Δt})$ 主导。这就是为什么反向过程和正向过程具有相同的函数形式的原因。并且，这种正向和反向过程之间的一般关系，比仅限于高斯扩散更为普遍。
+
+**Technical Details [Optional]：** **Claim 1**不足以证明DDPM算法的正确性，问题在于随着$\Delta t$的减小，我们每步近似的误差减小，但需要的总步数增加。因此如果每步的误差减小的程度小于总步数增加增大的程度的话，误差会积累到一个很大的程度。因此我们需要更进一步的量化。下面的**Lemma 1**表明如果每步噪声的方差为$\sigma^2$，则每步高斯近似的KL误差为$\mathcal{O}(\sigma^4)$.这种衰减速度相当快，因为步数随着$\Omega(1/\sigma^2)$增长。
+
+**Lemma 1**设 $p(x)$ 是 $\mathbb{R}$ 上的任意密度，具有有界的1到4阶导数。考虑联合分布 $(x_0, x_1)$，其中 $x_0 ∼ p，x_1 ∼ x_0 + \mathcal{N}(0, \sigma^2)$。那么，对于任意的条件 $z\in \mathbb{R}$，我们有 
+
+$$\begin{equation}
+    \mathrm{KL}\left(\mathcal{N}(\mu_z,\sigma^2) \vert \vert  p_{x_0\vert x_1}(\cdot \vert  x_1=z)\right)\leq O(\sigma^4)
+\end{equation}$$
+
+其中：
+
+$$\begin{equation}
+    \mu_z:=z+\sigma^2\nabla\log p(z)
+\end{equation}$$
+
+这个结论可以通过泰勒展开来证明。
+
+### 2.2 算法
