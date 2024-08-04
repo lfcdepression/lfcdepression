@@ -659,7 +659,7 @@ $$\begin{equation}
 为了确定有效速度 $v_t^*(x_t)$，我们应该通过所有个体粒子速度 $v_{t}^{[x_{1},x_{0}]}$ 的加权平均值来确定，其中权重是在 $x_t$ 处的粒子由点级流 $v^{[x_1,x_0]}$ 生成的概率。最终结果
 
 $$\begin{equation}
-    v_t^*(x_t):=\underset{x_0,x_1|x_t}{\mathbb{E}}[v_t^{[x_1,x_0]}(x_t)\mid x_t]
+    v_t^*(x_t):=\underset{x_0,x_1\vert x_t}{\mathbb{E}}[v_t^{[x_1,x_0]}(x_t)\vert  x_t]
 \end{equation}$$
 
 其中，期望对应于由采样 $(x_1,x_0)~\sim~\Pi_{q,p}$ 引起的 (x1,x0,xt) 的联合分布，其中$(x_1,x_0,x_t)$，令$x_t\leftarrow\mathrm{RunFlow}(v^{[x_1,x_0]},x_1,t)$。
@@ -699,6 +699,60 @@ $$\begin{equation}
 
 ### 4.5 Flow Matching
 
-现在，唯一剩下的问题是，直接用方程（58）评估 $v^*$ 需要针对给定的 $x_t$ 从 p(x0∣xt) 进行采样。如果我们知道如何在 t=1 时执行此操作，我们就已经解决了生成建模问题！
+现在，唯一剩下的问题是，直接用方程（58）评估 $v^*$ 需要针对给定的 $x_t$ 从 $p(x_0\vert  x_t)$ 进行采样。如果我们知道如何在 $t=1$ 时执行此操作，我们就已经解决了生成建模问题。
 
-幸运的是，我们可以利用与 DDPM 相同的技巧：我们只需能够从联合分布 (x0,xt) 进行采样，然后解决一个回归问题。类似于 DDPM，利用通用事实：
+幸运的是，可以利用与 DDPM 相同的技巧：只需能够从联合分布 $(x_0,x_t)$ 进行采样，然后解决一个回归问题。类似于 DDPM：
+
+$$\begin{equation}
+    \begin{aligned}
+v_{t}^{*}(x_{t})& :=\underset{x_0,x_1\vert x_t}{\operatorname*{\mathbb{E}}}[v_t^{[x_1,x_0]}(x_t)\vert  x_t] \\
+\Longrightarrow v_t^*& =\underset{f:\mathbb{R}^d\to\mathbb{R}^d}{\mathbb{E}}\underset{(x_0,x_1,x_t)}{\operatorname*{E}}\vert \vert f(x_t)-v_t^{[x_1,x_0]}(x_t)\vert \vert _2^2 
+\end{aligned}
+\end{equation}$$
+
+上面的式子表明，为了计算模型$f_{\theta}$在固定时间$t$的损失，应该：
+
+- 从联合分布中采样源点和目标点$(x_1,x_0)$
+
+- 通过点对点流$v^{[x_1,x_0]}$，从点$x_1$到时间$t$确定性计算$x_t$。如果使用线性的那么我们有$x_{t}\leftarrow tx_{1}+(1-t)x_{0}$。
+
+- 在$x_t$处评估模型的预测$f_{\theta}(x_r)$，评估确定性向量$v_t^{[x_1,x_0]}(x_t)$，然后计算两个量之间的L2损失。
+
+
+为了从训练好的模型（即对 $v_{t}^{*}$ 的估计）中采样，我们首先从源点 $x_{1}\sim q$ 中采样，然后沿着学到的流将其传输到目标样本 $x_0$。**Pseudocode 4 5** 给出了基于流的模型训练和采样的明确过程（包括具体情况下的线性流）。
+
+![伪代码45](diffusion_elimentary/p11.png)
+
+**总结**
+
+下面是如何为目标分布 $p$ 学习流匹配生成模型的方法。
+
+*The Ingredients*
+
+我们首先选择：
+
+- 一个源分布 $q$，我们有效从中采样（例如标准高斯分布）。
+
+- 源分布 $q$ 和目标分布 $p$ 之间的耦合 $\Pi_{q,p}$​，它指定了如何联合采样一对源点和目标点 $(x_1,x_0)$，分别具有边际分布 $q$ 和 $p$。标准选择是独立耦合，即独立地从 $q$ 中采样 $x_1$ 和从 $p$ 中采样 $x_0$。
+  
+- 对所有点对 $(x_1,x_0)$，显式点对点流 $v^{[x_1,x_0]}$ 将 $x_1$ 转移到 $x_0$。我们必须能够在所有点上有效地计算向量场 $v_t^{[x_1,x_0]}$。
+
+这些成分理论上决定了边际向量场 $v^*$，它将 $q$ 转移到 $p$：
+
+$$\begin{equation}
+    v_t^*(x_t):=\underset{x_0,x_1\vert x_t}{\mathbb{E}}[v_t^{[x_1,x_0]}(x_t)\mid x_t]
+\end{equation}$$
+
+其中期望对应于联合分布：
+
+$$\begin{equation}
+    \begin{aligned}(x_1,x_0)&\sim\Pi_{q,p}\\x_t&:=\text{RunFlow}(v^{[x_1,x_0]},x_1,t)\end{aligned}
+\end{equation}$$
+
+**训练**
+
+通过反向传播 **Pseudocode 4** 计算的随机损失函数来训练神经网络 $f_{\theta}$，对于这个期望损失的最优函数是：$f_\theta(x_t,t)=v_t^*(x_t)$
+
+**采样**
+
+运行 **Pseudocode 5**，从（近似）目标分布 $p$ 中生成一个样本 $x_0$。
