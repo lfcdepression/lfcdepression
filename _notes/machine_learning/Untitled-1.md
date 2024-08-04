@@ -32,6 +32,7 @@ date: 2024-08-02
   - [4.3 边缘流](#43-边缘流)
   - [4.4 点对点流的简单选择](#44-点对点流的简单选择)
   - [4.5 Flow Matching](#45-flow-matching)
+- [参考文献](#参考文献)
 
 ## 1 扩散模型基础
 
@@ -50,7 +51,7 @@ $$\begin{equation}
 这被称为正向（forward）扩散过程，这个过程可以将给定数据分布转换为高斯噪声。方程(1)定义了一个关于所有${x_t}$的联合分布，并且我们令$\{p_t\}_{t\in[T]}$表示每个$x_t$的边缘分布（边缘分布：将联合概率分布投影到其组成随机变量之一的概率分布）。当步骤数$T$较大时，分布$p_T$与高斯分布接近，可以通过采样一个高斯分布来近似采样$p_T$。
 
 
-![高斯扩散过程](diffusion_elimentary/p1.png)
+![高斯扩散过程](machine_learning/diffusion_elimentary/p1.png)
 
 现在我们可以考虑将问题转换成，给定一个$p_T$如何求得$p_{T-1}$，我们将其称为反向采样器(reverse sampler)，假设我们有一个可用的反向采样器，我们可以从$p_T$即简单的高斯分布开始，迭代应用，得到$p_{T-1},p_{T-2},\cdots p_0$。扩散模型的关键之处在于学习每个中间过程的反向过程比直接从目标分布中采样更容易，有许多种反向采样器的构建方法，我们下面以DDPM为例。
 
@@ -70,7 +71,7 @@ $$\begin{equation}
 
 这是一个nontrivial的结果，我们将在后面证明它，这个结果带来了一个重大的简化：我们不在需要从头开始学习任意分布$p(x_{t−1} \vert  x_t)$，我们现在对于这个分布除了均值都已经了解了，我们使用$\mu_{t-1}(x_t)$表示其均值（均值$μ_{t−1} : \mathbb{R}^d \rightarrow \mathbb{R}^d$，因为$p(x_{t−1} \vert  x_t)$的均值取决于时间$t$和条件$x_t$）。当$\sigma$足够小时，我们可以将后验分布近似为高斯分布，因此**只要得到条件分布的均值，就可以完整学习这个条件分布**。
 
-![高斯反向过程](diffusion_elimentary/p2.png)
+![高斯反向过程](machine_learning/diffusion_elimentary/p2.png)
 
 学习 $p(x_{t−1} \vert  x_t)$ 的均值要比学习完整的条件分布简单得多，可以通过回归方法解决。具体而言，我们有一个联合分布 $(x_{t−1}, x_t)$，我们很容易可以从中采样，并且我们希望估计 $E[x_{t−1} \vert  x_t]$。这可以通过优化标准的回归损失来实现：
 
@@ -227,7 +228,7 @@ $$\begin{equation}
 
 **Pseudocode 1 2**  给出了显式的 DDPM 训练损失和采样代码。为了训练网络 $f_{\theta}$。训练过程通过均匀从区间[0,1]中抽样$t$来同时优化所有时间步$t$的$f_{\theta}$，通常通过反向传播来最小化**Pseudocode 1**输出的期望损失$L_{\theta}$。**Pseudocode 3**描述了密切相关的DDIM采样器。
 
-![DDPM算法](diffusion_elimentary/p3.png)
+![DDPM算法](machine_learning/diffusion_elimentary/p3.png)
 
 ### 2.3 方差缩减，预测x0
 
@@ -247,7 +248,7 @@ $$\begin{equation}
 
 **Claim 2**暗示，如果我们想要估计$\mathbb{E}[x_{t-\Delta t}\vert x_t]$，我们可以改为估计$\mathbb{E}[x_0\vert x_t]$，然后除以目前的步数即 $(t/\Delta t)$ ，DDPM 训练和抽样算法的方差缩减版本即使用这种方法。
 
-![方差缩减图示](diffusion_elimentary/p4.png)
+![方差缩减图示](machine_learning/diffusion_elimentary/p4.png)
 
 **Claim 2**背后的原理可以在上图中得到解释：首先，给定$x_t$预测$x_{t-\Delta t}$相当于预测最后的噪声步，即在正向过程中的$\eta_{t-\Delta t}=(x_t-x_{t-\Delta t})$。但如果只有最后的$x_t$，那么之前所有的噪声步$\{\eta_i\}_{i<t}$在直觉上“看起来是相同的”，我们无法区分最后一步添加的噪声和之前的噪声。通过这种对称性，我们可以推断，所有单独的噪声步在给定$x_t$的条件下是相同分布的（尽管不是独立的）。因此，我们可以不估计单个噪声步，而是等效估计所有之前噪声步的平均值，这样具有更低的方差。在到达时间$t$时有$t/\Delta t$ 个过去的噪声步，因此我们将总噪声除以这个数来计算平均值。
 
@@ -454,7 +455,7 @@ $$\begin{equation}
 
 作为一个具体的例子，如果目标分布 $p_0=\delta_{x0​​}$，如第 3.1 节所述，则 DDIM 的速度场是$v_t(x_t)=\left(\frac{\sigma_t-\sigma_{t-\Delta t}}{\sigma_t}\right)(x_0-x_t)/\Delta t$这是一个指向初始点 $x_0$ 的向量场（参考下图）
 
-![单点速度场](diffusion_elimentary/p5.png)
+![单点速度场](machine_learning/diffusion_elimentary/p5.png)
 
 ### 3.3 Case 2: 双点
 
@@ -505,7 +506,7 @@ v_{t}^{*}(x_{t})& =\frac{v_t^{[a]}(x_t)\cdot p(x_t\vert  x_0=a)+v_t^{[b]}(x_t)\c
 
 为了直观地理解这一点，考虑图中所示的关于气体的对应问题。假设我们有两种重叠的气体：红色气体密度为$\mathcal{N}(a,\sigma^2)$，速度为 $v^{[a]}_t$；蓝色气体密度为 N(b, σ^2)，速度为 $v^{[b]}_t$。我们想知道，合并气体的有效速度是多少（就像我们只看到灰度图一样）。显然，我们应该通过它们各自的密度加权平均个别气体的速度，就像在方程（48）中一样。
 
-![双点速度场](diffusion_elimentary/p6.png)
+![双点速度场](machine_learning/diffusion_elimentary/p6.png)
 
 现在我们已经解决了本节的主要子问题：我们找到了一个特定的向量场 $v_t^*$，它将 $p_t$ 转移到 $p_{t−\Delta t}$ ，适用于两点分布 $p_0$。现在剩下的是展示这个 $v_t^*$ 是否等价于 **Algorithm 2** 的速度场。
 
@@ -600,7 +601,7 @@ DDPM和DDIM在概念上有所区别，一种是随机的，而另一种是确定
 
 这个记忆训练数据的问题已经在小图像数据集上的扩散模型中被观察到，并且已经观察到，随着训练集大小的增加，记忆效应减少了 [Somepalli et al., 2023, Gu et al., 2023]。此外，像 Carlini 等人 [2023] 中指出的那样，记忆还被视为神经网络潜在的安全和版权问题，作者发现他们可以从稳定的扩散中恢复训练数据。下图展示了训练集大小的影响，并展示了使用 3 层 ReLU 网络训练的扩散模型的 DDIM 轨迹。我们可以看到，$N = 10$ 样本的扩散模型 “记忆” 了其训练集：其轨迹都收敛到训练点中的一个，而不是产生底层的螺旋分布。随着样本的增加，模型开始泛化：轨迹收敛到底层的螺旋流形。这些轨迹还开始更垂直于底层流形，表明正在学习低维结构。我们还注意到，在 $N = 10$ 的情况下，扩散模型失败了，人类可能无法从这些样本中识别出 “正确” 的图样（pattern），所以泛化的期望可能太高了。
 
-![DDIM轨迹](diffusion_elimentary/p7.png)
+![DDIM轨迹](machine_learning/diffusion_elimentary/p7.png)
 
 ## 4 Flow Matching
 
@@ -648,7 +649,7 @@ $$\begin{equation}
 
 我们的基本构建模块将是点态流（pointwise flow），它仅将单个点 $x_1$ 转移到点 $x_0$。直观地说，给定连接 $x_1$ 和 $x_0$ 的任意路径 $\{x_t\},t\in [0,1]$，点态流通过在每个点 $x_t$ 处给出其速度 $v_t(x_t)$ 来描述这条轨迹。形式上，$x_1$ 和 $x_0$ 之间的点态流是任何满足方程 55，并在 $t = 1$ 和 $t = 0$ 时具有边界条件 $x_1$ 和 $x_0$ 的流 $\{v_t\}_t$。我们将这样的流表示为 $v^{[x_1,x_0]}$。点态流并不唯一：在 $x_0$ 和 $x_1$ 之间存在许多不同的路径选择。
 
-![点态流](diffusion_elimentary/p8.png)
+![点态流](machine_learning/diffusion_elimentary/p8.png)
 
 ### 4.3 边缘流
 
@@ -685,9 +686,9 @@ $$\begin{equation}
 
 我们需要明确选择：点对点流、基础分布 $q$ 和耦合 $\Pi_{q,p}$。有许多简单的可行选择，基础分布 $q$ 可以是任何易于采样的分布。高斯分布是一个常见的选择，但绝非唯一的选择。下图使用了一个环形的基础分布，基础分布和目标分布之间的耦合$\Pi_{q,p}$，最简单的选择是独立耦合，即从$p$和$q$中独立采样。
 
-![点对点流](diffusion_elimentary/p9.png)
+![点对点流](machine_learning/diffusion_elimentary/p9.png)
 
-![边流](diffusion_elimentary/p10.png)
+![边流](machine_learning/diffusion_elimentary/p10.png)
 
 对于点对点流而言，可以说最简单的构造是线性点对点流：
 
@@ -721,7 +722,7 @@ v_{t}^{*}(x_{t})& :=\underset{x_0,x_1\vert x_t}{\operatorname*{\mathbb{E}}}[v_t^
 
 为了从训练好的模型（即对 $v_{t}^{*}$ 的估计）中采样，我们首先从源点 $x_{1}\sim q$ 中采样，然后沿着学到的流将其传输到目标样本 $x_0$。**Pseudocode 4 5** 给出了基于流的模型训练和采样的明确过程（包括具体情况下的线性流）。
 
-![伪代码45](diffusion_elimentary/p11.png)
+![伪代码45](machine_learning/diffusion_elimentary/p11.png)
 
 **总结**
 
@@ -740,7 +741,7 @@ v_{t}^{*}(x_{t})& :=\underset{x_0,x_1\vert x_t}{\operatorname*{\mathbb{E}}}[v_t^
 这些成分理论上决定了边际向量场 $v^*$，它将 $q$ 转移到 $p$：
 
 $$\begin{equation}
-    v_t^*(x_t):=\underset{x_0,x_1\vert x_t}{\mathbb{E}}[v_t^{[x_1,x_0]}(x_t)\mid x_t]
+    v_t^*(x_t):=\underset{x_0,x_1\vert x_t}{\mathbb{E}}[v_t^{[x_1,x_0]}(x_t)\vert  x_t]
 \end{equation}$$
 
 其中期望对应于联合分布：
@@ -756,3 +757,10 @@ $$\begin{equation}
 **采样**
 
 运行 **Pseudocode 5**，从（近似）目标分布 $p$ 中生成一个样本 $x_0$。
+
+
+## 参考文献
+
+[1] 1. Nakkiran, P., Bradley, A., Zhou, H. & Advani, M. Step-by-Step Diffusion: An Elementary Tutorial.  Preprint at https://doi.org/10.48550/arXiv.2406.08929 (2024).
+
+[2] [（2024，DDPM，DDIM，流匹配，SDE，ODE）扩散：基础教程](https://blog.csdn.net/qq_44681809/article/details/140063268)
