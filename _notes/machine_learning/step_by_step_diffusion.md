@@ -2,7 +2,7 @@
 title: "Step-by-Step Diffusion: An Elementary Tutorial"
 collection: notes
 permalink: /notes/Elementary_Diffusion
-date: 2024-08-02
+date: 2024-08-04
 
 ---
 
