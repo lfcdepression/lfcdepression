@@ -6,7 +6,7 @@ date: 2024-08-04
 
 ---
 
-扩散模型基础教程
+Preetum Nakkiran et al."Step-by-Step Diffusion: An Elementary Tutorial"学习笔记
 
 ## 目录
 
